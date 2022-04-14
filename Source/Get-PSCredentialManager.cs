@@ -13,6 +13,18 @@ namespace PSCredentialManager
         [Parameter(Mandatory = true)]
         public string Target { get; set; }
 
+        private string _Output = "PSCredential";
+        /// <summary>
+        /// <para type="description">Set output format: PSCredential, SecureString or ClearText.</para>
+        /// </summary>
+        [Parameter()]
+        [ValidateSet("PSCredential", "SecureString", "ClearText")]
+        public string Output
+        {
+            get { return _Output; }
+            set { _Output = value; }
+        }
+
         /// <summary>
         /// Begin
         /// </summary>
@@ -31,10 +43,22 @@ namespace PSCredentialManager
                 credential.Load();
                 WriteVerbose("Credential loaded.");
 
-                PSCredential psCredential = new PSCredential(credential.Username, credential.SecurePassword);
-                WriteObject(psCredential);
+                switch (Output)
+                {
+                    case "PSCredential":
+                        WriteObject(new PSCredential(credential.Username, credential.SecurePassword));
+                        break;
+                    case "SecureString":
+                        WriteObject(credential.SecurePassword);
+                        break;
+                    case "ClearText":
+                        WriteObject(credential.Password);
+                        break;
+                    default:
+                        WriteObject(new PSCredential(credential.Username, credential.SecurePassword));
+                        break;
+                }
             }
-
         }
 
         /// <summary>
