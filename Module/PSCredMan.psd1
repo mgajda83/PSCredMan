@@ -98,10 +98,10 @@ PrivateData = @{
         # Tags = @()
         
         # A URL to the license for this module.
-        # LicenseUri = 'https://github.com/mgajda83/PSCredentialManager/blob/main/LICENSE'
+        # LicenseUri = 'https://github.com/mgajda83/PSCredMan/blob/main/LICENSE'
 
         # A URL to the main website for this project.
-        # ProjectUri = 'https://github.com/mgajda83/PSCredentialManager'
+        # ProjectUri = 'https://github.com/mgajda83/PSCredMan'
 
         # A URL to an icon representing this module.
         # IconUri = ''
